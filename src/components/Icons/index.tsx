@@ -1,6 +1,7 @@
+import ArrowIcon from "./Arrow";
 import SearchIcon from "./Search";
 
-export type IconVariantType = "search";
+export type IconVariantType = "search" | "arrow";
 
 interface IIcon {
   variant: IconVariantType;
@@ -11,6 +12,8 @@ const Icon = ({ variant }: IIcon) => {
     switch (variant) {
       case "search":
         return <SearchIcon />;
+      case "arrow":
+        return <ArrowIcon />;
       default:
         return <></>;
     }

@@ -56,7 +56,7 @@ const Category = styled.p`
   padding: 0.5rem 0.75rem;
 `;
 
-const CategoryConteiner = styled.div`
+const CategoryContainer = styled.div`
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -88,11 +88,11 @@ const ArticleCard = ({
         </Details>
         <h2>{title}</h2>
         <Description>{content}</Description>
-        <CategoryConteiner>
+        <CategoryContainer>
           {categories.map((category) => (
             <Category>{category.name}</Category>
           ))}
-        </CategoryConteiner>
+        </CategoryContainer>
       </ContentContainer>
     </Container>
   );
