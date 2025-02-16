@@ -6,15 +6,18 @@ import ArticleCard from "../components/ArticleCard";
 import styled from "styled-components";
 import Button from "../components/Button";
 import Icon from "../components/Icons";
+import { BodySmallStyle, CaptionStyle, H2Style } from "../styles/typography";
 
 const DetailsContainer = styled.div`
+  ${CaptionStyle};
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 `;
 
 const AuthorImg = styled.img`
-  height: 3rem;
-  width: 3rem;
+  height: 2rem;
+  width: 2rem;
   border-radius: 50%¨;
   object-fit: cover;
 `;
@@ -39,6 +42,18 @@ const ArticleContainer = styled.div`
 
 const Container = styled.div`
   padding: 1rem;
+`;
+
+const Title = styled.h1`
+  ${H2Style};
+`;
+
+const Content = styled.p`
+  ${BodySmallStyle};
+`;
+
+const Subtitle = styled.h2`
+  ${H2Style};
 `;
 
 const Article = () => {
@@ -73,18 +88,21 @@ const Article = () => {
           <Button handleClick={() => navigate(-1)}>
             <Icon variant="arrow" /> Back
           </Button>
-          <h1>{article.title}</h1>
+          <Title>{article.title}</Title>
           <DetailsContainer>
             <AuthorImg src={article.author.profilePicture} />
             <div>
-              <p>Written by: {article.author.name}</p>
+              <p>
+                <span style={{ fontWeight: 600 }}>Written by:</span>{" "}
+                {article.author.name}
+              </p>
               <p>{dayjs(article.createdAt).format("MMM DD, YYYY")}</p>
             </div>
           </DetailsContainer>
           <BannerImg src={article.thumbnail_url} />
-          <p>{article.content}</p>
+          <Content>{article.content}</Content>
           <HorizontalLine />
-          <h2>Last Articles</h2>
+          <Subtitle>Last Articles</Subtitle>
           {lastArticles.map((article: any) => (
             <ArticleCard {...article} />
           ))}

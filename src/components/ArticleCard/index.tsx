@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import styled from "styled-components";
+import { BodySmallStyle, CaptionStyle, H3Style } from "../../styles/typography";
 
 interface IArticleCard {
   id: string;
@@ -28,6 +29,7 @@ const BannerImg = styled.img`
 `;
 
 const Description = styled.p`
+  ${BodySmallStyle};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -44,6 +46,7 @@ const Decoration = styled.span`
 `;
 
 const Details = styled.div`
+  ${CaptionStyle};
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -57,6 +60,7 @@ const Category = styled.p`
 `;
 
 const CategoryContainer = styled.div`
+  ${CaptionStyle};
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -66,6 +70,10 @@ const Container = styled.a`
   text-decoration: none;
   color: #000000;
   cursor: pointer;
+`;
+
+const Title = styled.h2`
+  ${H3Style};
 `;
 
 const ArticleCard = ({
@@ -86,7 +94,7 @@ const ArticleCard = ({
           <Decoration />
           <p>{author.name}</p>
         </Details>
-        <h2>{title}</h2>
+        <Title>{title}</Title>
         <Description>{content}</Description>
         <CategoryContainer>
           {categories.map((category) => (

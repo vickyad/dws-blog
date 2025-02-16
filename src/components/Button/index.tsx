@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { BodyLargeStyle } from "../../styles/typography";
 
 interface IButton {
   children: ReactNode;
@@ -7,10 +8,11 @@ interface IButton {
 }
 
 const ButtonStyle = styled.button`
+  ${BodyLargeStyle};
   border: 1px solid ${({ theme }) => theme.colors.secondary.medium};
   color: ${({ theme }) => theme.colors.secondary.medium};
   fill: ${({ theme }) => theme.colors.secondary.medium};
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   gap: 0.25rem;
   border-radius: 2rem;

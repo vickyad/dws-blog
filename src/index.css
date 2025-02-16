@@ -1,3 +1,4 @@
+/* RESET STYLE */
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -65,4 +66,19 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+/* FONT CONFIGURATION */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+a {
+  font-family: "Open Sans", serif;
 }
