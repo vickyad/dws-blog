@@ -1,19 +1,27 @@
 import styled from "styled-components";
-import dentsuLogo from "../../assets/dentsu_logo.png";
-import IconButton from "../IconButton";
+import { useState } from "react";
+import Search from "../Search";
+import Icon from "../Icons";
 
 const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutrals.extraLight};
-  padding: 1rem;
+  padding: 1.25rem 1rem;
+
+  @media screen and (min-width: 1024px) {
+    padding: 1rem 3.5rem;
+  }
 `;
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+
   return (
     <HeaderStyled>
-      <img src={dentsuLogo} alt="Dentsu logo" height={40} />
-      <IconButton icon="search" />
+      <Icon variant="logo" />
+      <Search value={search} handleChange={setSearch} />
     </HeaderStyled>
   );
 };

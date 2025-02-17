@@ -1,7 +1,8 @@
 import ArrowIcon from "./Arrow";
+import DentsuLogoIcon from "./DentsuLogo";
 import SearchIcon from "./Search";
 
-export type IconVariantType = "search" | "arrow";
+export type IconVariantType = "search" | "arrow" | "logo";
 
 interface IIcon {
   variant: IconVariantType;
@@ -10,10 +11,12 @@ interface IIcon {
 const Icon = ({ variant }: IIcon) => {
   const getIcon = () => {
     switch (variant) {
-      case "search":
-        return <SearchIcon />;
       case "arrow":
         return <ArrowIcon />;
+      case "logo":
+        return <DentsuLogoIcon />;
+      case "search":
+        return <SearchIcon />;
       default:
         return <></>;
     }

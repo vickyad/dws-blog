@@ -82,3 +82,8 @@ button,
 a {
   font-family: "Open Sans", serif;
 }
+
+/* GLOBAL STYLES */
+body {
+  background-color: #f0f0f2;
+}
