@@ -68,6 +68,10 @@ h6 {
   isolation: isolate;
 }
 
+ul {
+  list-style: none;
+}
+
 /* FONT CONFIGURATION */
 html,
 body,

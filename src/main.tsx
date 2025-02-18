@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Home from "./pages/Home.tsx";
-import Article from "./pages/Article.tsx";
+import Home from "./pages/Home/index.tsx";
+import Article from "./pages/Article/index.tsx";
 import "./index.css";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme.ts";
+import { theme } from "./styles/theme.ts";
 import Header from "./components/Header/index.tsx";
 
 createRoot(document.getElementById("root")!).render(

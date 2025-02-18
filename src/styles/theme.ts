@@ -1,4 +1,3 @@
-// theme.ts
 import { DefaultTheme } from "styled-components";
 
 export const theme: DefaultTheme = {
@@ -9,11 +8,13 @@ export const theme: DefaultTheme = {
       dark: "#020318",
     },
     secondary: {
+      extraLight: "#FFE7EE",
       light: "#ef4c84",
       medium: "#d31450",
       dark: "#8c1038",
     },
     accent: {
+      extraLight: "#E4EEF0",
       light: "#00bfc1",
       medium: "#009598",
       dark: "#006c6e",
@@ -30,7 +31,6 @@ export const theme: DefaultTheme = {
   },
 };
 
-// Extend the DefaultTheme interface
 declare module "styled-components" {
   export interface DefaultTheme {
     colors: {
@@ -40,11 +40,13 @@ declare module "styled-components" {
         dark: string;
       };
       secondary: {
+        extraLight: string;
         light: string;
         medium: string;
         dark: string;
       };
       accent: {
+        extraLight: string;
         light: string;
         medium: string;
         dark: string;

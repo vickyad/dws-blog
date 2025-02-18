@@ -2,17 +2,17 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import ArticleCard from "../components/ArticleCard";
+import ArticleCard from "../../components/ArticleCard";
 import styled from "styled-components";
-import Button from "../components/Button";
-import Icon from "../components/Icons";
+import Button from "../../components/Button";
+import Icon from "../../components/Icons";
 import {
   BodyLargeStyle,
   BodySmallStyle,
   CaptionStyle,
   H1Style,
   H2Style,
-} from "../styles/typography";
+} from "../../styles/typography";
 
 const DetailsContainer = styled.div`
   ${CaptionStyle};
