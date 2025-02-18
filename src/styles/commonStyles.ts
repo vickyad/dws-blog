@@ -10,3 +10,8 @@ export const FlexRowCenterSpaceBetweenStyle = css`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const FlexColumnStyle = css`
+  display: flex;
+  flex-direction: column;
+`;

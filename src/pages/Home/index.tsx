@@ -1,50 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import styled from "styled-components";
 import ArticleCard from "../../components/ArticleCard";
-import Icon from "../../components/Icons";
 import Header from "./Header";
-
-const Container = styled.div`
-  padding: 1rem;
-
-  @media screen and (min-width: 1024px) {
-    padding: 2rem 3.5rem;
-  }
-`;
-
-const ArticleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media screen and (min-width: 1024px) {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-`;
-
-const FilterContainer = styled.div`
-  box-shadow: 0px 4px 29.6px 0px #5b7bc13d;
-  background-color: ${({ theme }) => theme.colors.neutrals.lightest};
-  border-radius: 1rem;
-  padding: 1rem;
-  height: fit-content;
-`;
-
-const InnerContainer = styled.div`
-  @media screen and (min-width: 1024px) {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 1.5rem;
-  }
-`;
-
-const Option = styled.p`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.neutrals.extraLight};
-  padding: 0.75rem 0.5rem;
-`;
+import LateralFilter from "./LateralFilter";
+import { ArticleContainer, Container, InnerContainer } from "./styles";
+import api from "../../api/axios";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -85,20 +44,24 @@ function App() {
   useEffect(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
 
-    axios
-      .get("https://tech-test-backend.dwsbrazil.io/posts/")
-      .then((response) => {
-        setArticlesList(response.data);
-        setFilteredArticleList(response.data);
-      });
+    const fetchData = async () => {
+      try {
+        const [articlesRes, categoriesRes, authorsRes] = await Promise.all([
+          api.get("/posts"),
+          api.get("/categories"),
+          api.get("/authors"),
+        ]);
 
-    axios
-      .get("https://tech-test-backend.dwsbrazil.io/categories/")
-      .then((response) => setCategoryList(response.data));
+        setArticlesList(articlesRes.data);
+        setFilteredArticleList(articlesRes.data);
+        setCategoryList(categoriesRes.data);
+        setAuthorList(authorsRes.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-    axios
-      .get("https://tech-test-backend.dwsbrazil.io/authors/")
-      .then((response) => setAuthorList(response.data));
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -126,6 +89,16 @@ function App() {
     setFilteredArticleList(filteredList);
   }, [categoriesSelected, authorsSelected, sortBy]);
 
+  const ArticleList = () => {
+    return (
+      <ArticleContainer>
+        {filteredArticleList.map((article: any) => (
+          <ArticleCard {...article} />
+        ))}
+      </ArticleContainer>
+    );
+  };
+
   return (
     <Container>
       <Header
@@ -141,25 +114,16 @@ function App() {
       />
       <InnerContainer>
         {isMobile ? null : (
-          <FilterContainer>
-            <h3>
-              <Icon variant="filter" /> Filters
-            </h3>
-            <h4>Category</h4>
-            {categoryList.map((category: any) => (
-              <Option>{category.name}</Option>
-            ))}
-            <h4>Author</h4>
-            {authorList.map((author: any) => (
-              <Option>{author.name}</Option>
-            ))}
-          </FilterContainer>
+          <LateralFilter
+            categoryList={categoryList}
+            categoriesSelected={categoriesSelected}
+            handleSelectCategory={handleSelectCategory}
+            authorList={authorList}
+            authorsSelected={authorsSelected}
+            handleSelectAuthor={handleSelectAuthor}
+          />
         )}
-        <ArticleContainer>
-          {filteredArticleList.map((article: any) => (
-            <ArticleCard {...article} />
-          ))}
-        </ArticleContainer>
+        <ArticleList />
       </InnerContainer>
     </Container>
   );
