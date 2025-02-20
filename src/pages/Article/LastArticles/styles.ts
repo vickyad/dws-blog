@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { H2Style } from "../../../styles/typography";
+import { FlexColumnStyle } from "../../../styles/commonStyles";
 
 export const Subtitle = styled.h2`
   ${H2Style};
@@ -11,8 +12,7 @@ export const Subtitle = styled.h2`
 `;
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexColumnStyle};
   gap: 1rem;
 
   @media screen and (min-width: 1024px) {

@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { BodySmallStyle } from "../../styles/typography";
+import { FlexColumnStyle } from "../../styles/commonStyles";
 
 export const OptionsContainer = styled.ul`
   ${BodySmallStyle};
+  ${FlexColumnStyle};
   background-color: ${({ theme }) => theme.colors.neutrals.lightest};
   box-shadow: 0px 4px 29.6px 0px #5b7bc13d;
   border-radius: 1rem;
@@ -10,8 +12,6 @@ export const OptionsContainer = styled.ul`
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
 `;
 

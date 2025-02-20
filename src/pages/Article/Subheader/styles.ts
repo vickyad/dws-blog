@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { H1Style, H2Style } from "../../../styles/typography";
+import { FlexColumnStyle } from "../../../styles/commonStyles";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexColumnStyle};
   gap: 1.5rem;
 `;
 

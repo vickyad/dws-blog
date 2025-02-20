@@ -4,11 +4,11 @@ import Icon from "../../../components/Icons";
 import { Container, Title } from "./styles";
 import { useEffect, useState } from "react";
 
-interface IHeader {
+interface ISubheader {
   title: string;
 }
 
-const Header = ({ title }: IHeader) => {
+const Subheader = ({ title }: ISubheader) => {
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -20,14 +20,14 @@ const Header = ({ title }: IHeader) => {
     <>
       {isMobile ? (
         <Container>
-          <Button handleClick={() => navigate(-1)}>
+          <Button handleClick={() => navigate(-1)} variant="secondary">
             <Icon variant="arrow" /> Back
           </Button>
           <Title>{title}</Title>
         </Container>
       ) : (
         <>
-          <Button handleClick={() => navigate(-1)}>
+          <Button handleClick={() => navigate(-1)} variant="secondary">
             <Icon variant="arrow" /> Back
           </Button>
           <Title>{title}</Title>
@@ -36,4 +36,4 @@ const Header = ({ title }: IHeader) => {
     </>
   );
 };
-export default Header;
+export default Subheader;

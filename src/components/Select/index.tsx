@@ -20,6 +20,7 @@ const Select = ({
   return (
     <div style={{ position: "relative" }}>
       <Button
+        variant="secondary"
         handleClick={() => setOpenOptions(!openOptions)}
         style={{ width: "max-content" }}
       >

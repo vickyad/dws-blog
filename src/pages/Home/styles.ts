@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FlexColumnStyle } from "../../styles/commonStyles";
 
 export const Container = styled.div`
   padding: 1rem;
@@ -9,8 +10,7 @@ export const Container = styled.div`
 `;
 
 export const ArticleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexColumnStyle};
   gap: 1rem;
 
   @media screen and (min-width: 1024px) {

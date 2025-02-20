@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../../api/axios";
-import Header from "./Header";
+import Subheader from "./Subheader";
 import {
   BannerImg,
   Container,
@@ -11,9 +11,11 @@ import {
 } from "./styles";
 import Details from "./Details";
 import LastArticles from "./LastArticles";
+import Header from "../../components/Header";
 
 const Article = () => {
   const { id } = useParams();
+  const [search, setSearch] = useState("");
   const [article, setArticle] = useState<any>(null);
   const [lastArticles, setLastArticles] = useState<any>([]);
 
@@ -33,21 +35,24 @@ const Article = () => {
   }, [article]);
 
   return (
-    <Container>
-      {article ? (
-        <>
-          <Header title={article.title} />
-          <span />
-          <ContentContainer>
-            <Details author={article.author} createdAt={article.createdAt} />
-            <BannerImg src={article.thumbnail_url} />
-            <Content>{article.content}</Content>
-            <HorizontalLine />
-            <LastArticles lastArticles={lastArticles} />
-          </ContentContainer>
-        </>
-      ) : null}
-    </Container>
+    <>
+      <Header search={search} handleChange={setSearch} />
+      <Container>
+        {article ? (
+          <>
+            <Subheader title={article.title} />
+            <span />
+            <ContentContainer>
+              <Details author={article.author} createdAt={article.createdAt} />
+              <BannerImg src={article.thumbnail_url} />
+              <Content>{article.content}</Content>
+              <HorizontalLine />
+              <LastArticles lastArticles={lastArticles} />
+            </ContentContainer>
+          </>
+        ) : null}
+      </Container>
+    </>
   );
 };
 export default Article;

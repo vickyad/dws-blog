@@ -1,22 +1,25 @@
+import Button from "../../../components/Button";
 import Icon from "../../../components/Icons";
 import { Container, Option, OptionsContainer, Subtitle, Title } from "./styles";
 
 interface ILateralFilter {
   categoryList: any[];
   categoriesSelected: any[];
-  handleSelectCategory: (newOption: { id: string; name: string }) => void;
   authorList: any[];
   authorsSelected: any[];
+  handleSelectCategory: (newOption: { id: string; name: string }) => void;
   handleSelectAuthor: (newOption: { id: string; name: string }) => void;
+  handleApplyFilters: () => void;
 }
 
 const LateralFilter = ({
   categoryList,
   categoriesSelected,
-  handleSelectCategory,
   authorList,
   authorsSelected,
+  handleSelectCategory,
   handleSelectAuthor,
+  handleApplyFilters,
 }: ILateralFilter) => {
   return (
     <Container>
@@ -49,6 +52,13 @@ const LateralFilter = ({
           ))}
         </OptionsContainer>
       </div>
+      <Button
+        handleClick={handleApplyFilters}
+        variant="primary"
+        style={{ width: "100%" }}
+      >
+        Apply filters
+      </Button>
     </Container>
   );
 };

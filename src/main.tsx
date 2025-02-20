@@ -1,17 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { ThemeProvider } from "styled-components";
 import Home from "./pages/Home/index.tsx";
 import Article from "./pages/Article/index.tsx";
-import "./index.css";
-import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme.ts";
-import Header from "./components/Header/index.tsx";
+import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <Header />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

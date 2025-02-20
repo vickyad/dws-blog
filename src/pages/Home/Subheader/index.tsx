@@ -8,7 +8,7 @@ import {
   Title,
 } from "./styles";
 
-interface IHeader {
+interface ISubheader {
   isMobile: boolean;
   categoryList: any[];
   categoriesSelected: any[];
@@ -20,7 +20,7 @@ interface IHeader {
   handleSortBy: (newOption: number) => void;
 }
 
-const Header = ({
+const Subheader = ({
   isMobile,
   categoryList,
   categoriesSelected,
@@ -30,7 +30,7 @@ const Header = ({
   handleSelectAuthor,
   sortBy,
   handleSortBy,
-}: IHeader) => {
+}: ISubheader) => {
   const DesktopHeader = () => {
     return (
       <>
@@ -77,4 +77,4 @@ const Header = ({
     </HeaderContainer>
   );
 };
-export default Header;
+export default Subheader;

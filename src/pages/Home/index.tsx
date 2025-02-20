@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import ArticleCard from "../../components/ArticleCard";
-import Header from "./Header";
+import Subheader from "./Subheader";
 import LateralFilter from "./LateralFilter";
 import { ArticleContainer, Container, InnerContainer } from "./styles";
 import api from "../../api/axios";
+import Header from "../../components/Header";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
+  const [search, setSearch] = useState("");
   const [articlesList, setArticlesList] = useState<any>([]);
   const [filteredArticleList, setFilteredArticleList] = useState<any>([]);
   const [authorList, setAuthorList] = useState<any>([]);
@@ -41,6 +43,31 @@ function App() {
     }
   };
 
+  const handleApplyFilters = () => {
+    if (!categoriesSelected.length && !authorsSelected.length && sortBy === 1)
+      setFilteredArticleList(articlesList);
+
+    let filteredList = [...articlesList];
+
+    if (categoriesSelected.length)
+      filteredList = filteredList.filter((article: any) =>
+        article.categories.some((category: any) =>
+          categoriesSelected
+            .map((category: any) => category.id)
+            .includes(category.id)
+        )
+      );
+
+    if (authorsSelected.length)
+      filteredList = filteredList.filter((article: any) =>
+        authorsSelected
+          .map((author: any) => author.id)
+          .includes(article.authorId)
+      );
+
+    setFilteredArticleList(filteredList);
+  };
+
   useEffect(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
 
@@ -65,29 +92,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!categoriesSelected.length && !authorsSelected.length && sortBy === 1)
-      setFilteredArticleList(articlesList);
-
     let filteredList = [...articlesList];
 
-    if (categoriesSelected.length)
-      filteredList = filteredList.filter((article: any) =>
-        article.categories.some((category: any) =>
-          categoriesSelected
-            .map((category: any) => category.id)
-            .includes(category.id)
-        )
+    if (search.length) {
+      filteredList = filteredList.filter((article) =>
+        article.title.toLowerCase().includes(search.toLowerCase())
       );
-
-    if (authorsSelected.length)
-      filteredList = filteredList.filter((article: any) =>
-        authorsSelected
-          .map((author: any) => author.id)
-          .includes(article.authorId)
-      );
+    }
 
     setFilteredArticleList(filteredList);
-  }, [categoriesSelected, authorsSelected, sortBy]);
+  }, [sortBy, search]);
 
   const ArticleList = () => {
     return (
@@ -100,32 +114,36 @@ function App() {
   };
 
   return (
-    <Container>
-      <Header
-        isMobile={isMobile}
-        categoryList={categoryList}
-        categoriesSelected={categoriesSelected}
-        handleSelectCategory={handleSelectCategory}
-        authorList={authorList}
-        authorsSelected={authorsSelected}
-        handleSelectAuthor={handleSelectAuthor}
-        sortBy={sortBy}
-        handleSortBy={setSortBy}
-      />
-      <InnerContainer>
-        {isMobile ? null : (
-          <LateralFilter
-            categoryList={categoryList}
-            categoriesSelected={categoriesSelected}
-            handleSelectCategory={handleSelectCategory}
-            authorList={authorList}
-            authorsSelected={authorsSelected}
-            handleSelectAuthor={handleSelectAuthor}
-          />
-        )}
-        <ArticleList />
-      </InnerContainer>
-    </Container>
+    <>
+      <Header search={search} handleChange={setSearch} />
+      <Container>
+        <Subheader
+          isMobile={isMobile}
+          categoryList={categoryList}
+          categoriesSelected={categoriesSelected}
+          handleSelectCategory={handleSelectCategory}
+          authorList={authorList}
+          authorsSelected={authorsSelected}
+          handleSelectAuthor={handleSelectAuthor}
+          sortBy={sortBy}
+          handleSortBy={setSortBy}
+        />
+        <InnerContainer>
+          {isMobile ? null : (
+            <LateralFilter
+              categoryList={categoryList}
+              categoriesSelected={categoriesSelected}
+              handleSelectCategory={handleSelectCategory}
+              authorList={authorList}
+              authorsSelected={authorsSelected}
+              handleSelectAuthor={handleSelectAuthor}
+              handleApplyFilters={handleApplyFilters}
+            />
+          )}
+          <ArticleList />
+        </InnerContainer>
+      </Container>
+    </>
   );
 }
 

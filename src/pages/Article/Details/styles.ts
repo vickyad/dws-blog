@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { BodyLargeStyle, CaptionStyle } from "../../../styles/typography";
+import { FlexRowStyle } from "../../../styles/commonStyles";
 
 export const DetailsContainer = styled.div`
   ${CaptionStyle};
-  display: flex;
+  ${FlexRowStyle};
   gap: 0.5rem;
-  align-items: center;
 
   @media screen and (min-width: 1024px) {
     ${BodyLargeStyle};
